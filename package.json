@@ -1,6 +1,6 @@
 {
   "name": "express-robots",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Express middleware for generating your robots.txt",
   "main": "index.js",
   "directories": {
