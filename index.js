@@ -20,7 +20,6 @@ module.exports = function(robots) {
 
 function render(robots) {
   return asArray(robots).map(function(robot) {
-    // console.log('test', [robot.UserAgent].concat(asArray(robot.Disallow)) );
     return ['UserAgent: ' + robot.UserAgent].concat(asArray(robot.Disallow).map(function(disallow) {
       return 'Disallow: ' + disallow;
     })).join('\n');
