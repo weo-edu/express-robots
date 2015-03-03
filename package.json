@@ -24,5 +24,14 @@
   "bugs": {
     "url": "https://github.com/weo-edu/express-robots/issues"
   },
-  "homepage": "https://github.com/weo-edu/express-robots"
+  "homepage": "https://github.com/weo-edu/express-robots",
+  "dependencies": {
+    "as-array": "git://github.com/weo-edu/as-array"
+  },
+  "devDependencies": {
+    "chai": "^2.1.0",
+    "express": "^4.12.1",
+    "mocha": "^2.1.0",
+    "supertest": "^0.15.0"
+  }
 }
