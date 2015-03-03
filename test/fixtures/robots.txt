@@ -1,2 +1,2 @@
-UserAgent: Googlebot
+User-agent: Googlebot
 Disallow: /nogoogle

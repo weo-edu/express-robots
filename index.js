@@ -20,7 +20,7 @@ module.exports = function(robots) {
 
 function render(robots) {
   return asArray(robots).map(function(robot) {
-    return ['UserAgent: ' + robot.UserAgent].concat(asArray(robot.Disallow).map(function(disallow) {
+    return ['User-agent: ' + robot.UserAgent].concat(asArray(robot.Disallow).map(function(disallow) {
       return 'Disallow: ' + disallow;
     })).join('\n');
   }).join('\n');

@@ -10,7 +10,7 @@ describe('express-robots', function() {
       .get('/robots.txt')
       .end(function(err, res) {
         expect(res.status).to.equal(200);
-        expect(res.text).to.equal('UserAgent: *\nDisallow: /');
+        expect(res.text).to.equal('User-agent: *\nDisallow: /');
         done();
       });
   });
