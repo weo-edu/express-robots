@@ -24,4 +24,14 @@ describe('express-robots', function() {
         expect(res.text).to.equal(fs.readFileSync(__dirname + '/fixtures/robots.txt', 'utf8'));
       });
   });
+
+  it('should respond with an empty file if nothing is specified', function() {
+    var request = supertest(robots());
+    request
+      .get('/robots.txt')
+      .end(function(err, res) {
+        expect(res.status).to.equal(200);
+        expect(res.text).to.equal('');
+      });
+  });
 });

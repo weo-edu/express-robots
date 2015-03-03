@@ -4,9 +4,12 @@ var asArray = require('as-array');
 module.exports = function(robots) {
   var app = require('express')();
 
-  robots = 'string' === typeof robots
-    ? fs.readFileSync(robots, 'utf8')
-    : render(robots);
+  if(robots) {
+    robots = 'string' === typeof robots
+      ? fs.readFileSync(robots, 'utf8')
+      : render(robots);
+  } else
+    robots = '';
 
   app.get('/robots.txt', function(req, res) {
     res.send(robots);
