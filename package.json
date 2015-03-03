@@ -1,0 +1,28 @@
+{
+  "name": "express-robots",
+  "version": "0.1.0",
+  "description": "Express middleware for generating your robots.txt",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/weo-edu/express-robots"
+  },
+  "keywords": [
+    "express",
+    "robots",
+    "robots.txt",
+    "robots"
+  ],
+  "author": "ashaffer (http://github.com/ashaffer)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/weo-edu/express-robots/issues"
+  },
+  "homepage": "https://github.com/weo-edu/express-robots"
+}
