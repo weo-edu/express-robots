@@ -10,6 +10,7 @@ describe('express-robots', function() {
       .get('/robots.txt')
       .end(function(err, res) {
         expect(res.status).to.equal(200);
+        expect(res.headers['content-type']).to.equal('text/plain; charset=utf-8');
         expect(res.text).to.equal('User-agent: *\nDisallow: /');
         done();
       });
@@ -34,4 +35,5 @@ describe('express-robots', function() {
         expect(res.text).to.equal('');
       });
   });
+
 });

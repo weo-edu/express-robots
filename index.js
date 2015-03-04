@@ -12,6 +12,7 @@ module.exports = function(robots) {
     robots = '';
 
   app.get('/robots.txt', function(req, res) {
+    res.header('Content-Type', 'text/plain');
     res.send(robots);
   });
 
