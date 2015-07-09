@@ -28,8 +28,8 @@ module.exports = function(robots, opts) {
       , 'Cache-Control': 'public, max-age=' + (maxAge / 1000)
     }
 
-    res.header('Content-Type', 'text/plain');
-    res.send(robots);
+    res.writeHead(headers);
+    res.end(robots);
   });
 
   return app;
