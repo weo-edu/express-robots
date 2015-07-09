@@ -1,17 +1,33 @@
 var fs = require('fs');
 var asArray = require('as-array');
+var crypto = require('crypto');
 
-module.exports = function(robots) {
+module.exports = function(robots, opts) {
   var app = require('express')();
 
-  if(robots) {
-    robots = 'string' === typeof robots
-      ? fs.readFileSync(robots, 'utf8')
-      : render(robots);
-  } else
-    robots = '';
+  options = options || {}
+  var maxAge = options.maxAge || 86400000
+
+
+  if (!robots) {
+    throw new Error('No path or data provided for robots.txt file');
+  }
+
+
+
+  robots = 'string' === typeof robots
+    ? fs.readFileSync(robots, 'utf8')
+    : render(robots);
+
 
   app.get('/robots.txt', function(req, res) {
+    var  headers = { 
+      'Content-Type': 'text/plain'
+      , 'Content-Length': robots.length
+      , 'ETag': '"' + crypto.createHash('md5').update(robots).digest('hex') + '"'
+      , 'Cache-Control': 'public, max-age=' + (maxAge / 1000)
+    }
+
     res.header('Content-Type', 'text/plain');
     res.send(robots);
   });
