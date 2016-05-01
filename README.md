@@ -10,21 +10,63 @@ app.use(robots(__dirname + '/robots.txt'));
 
 ## Using an object
 
+### Basic object
+
 ```javascript
 app.use(robots({UserAgent: '*', Disallow: '/'}))
 ```
 
-Or
+#### Will produce:
+```
+UserAgent: *
+Disallow: /
+```
+
+### Or an array of objects
 
 ```javascript
 app.use(robots([
   {
     UserAgent: 'Googlebot',
-    Disallow: '/nogoogle'
+    Disallow: '/no-google'
   },
   {
     UserAgent: 'Bingbot',
-    Disallow: '/nobing'
+    Disallow: '/no-bing'
   }
 ]));
+```
+
+#### Will produce:
+```
+UserAgent: Googlebot
+Disallow: /no-google
+UserAgent: Bingbot
+Disallow: /no-bing
+```
+
+### Or either property (UserAgent | Disallow) as an array
+
+```javascript
+app.use(robots([
+  {
+    UserAgent: [ 'Googlebot', 'Slurp' ],
+    Disallow: [ '/no-google', '/no-yahoo' ]
+  },
+  {
+    UserAgent: '*',
+    Disallow: [ '/no-bots', '/still-no-bots' ]
+  }
+]));
+```
+
+#### Will produce:
+```
+UserAgent: Googlebot
+UserAgent: Slurp
+Disallow: /no-google
+Disallow: /no-yahoo
+UserAgent: *
+Disallow: /no-bots
+Disallow: /still-no-bots
 ```
