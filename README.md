@@ -22,6 +22,20 @@ UserAgent: *
 Disallow: /
 ```
 
+### Crawl Delay
+You can optionally pass a CrawlDelay in just like passing in Disallow
+
+```javascript
+app.use(robots({UserAgent: '*', Disallow: '/', CrawlDelay: '5'}))
+```
+
+#### Will produce:
+```
+UserAgent: *
+Disallow: /
+Crawl-delay: 5
+```
+
 ### Or an array of objects
 
 ```javascript
