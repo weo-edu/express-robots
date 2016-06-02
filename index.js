@@ -35,6 +35,9 @@ function render(robots) {
     } else {
       userAgentArray.push('User-agent: ' + robot.UserAgent);
     }
+    if (robot.CrawlDelay) {
+      userAgentArray.push('Crawl-delay: ' + robot.CrawlDelay);
+    }
     return userAgentArray.concat(asArray(robot.Disallow).map(function(disallow) {
       if (Array.isArray(disallow)) {
         return disallow.map(function(line) {
