@@ -8,21 +8,23 @@ if (!Array.isArray) {
 }
 
 module.exports = function(robots) {
-  var app = require('express')();
-
-  if(robots) {
-    robots = 'string' === typeof robots
-      ? fs.readFileSync(robots, 'utf8')
-      : render(robots);
-  } else
-    robots = '';
-
-  app.get('/robots.txt', function(req, res) {
+  return function middleware(req, res, next) {
+    if (req.url.toLowerCase() !== '/robots.txt') {
+      next();
+      return;
+    }
+    
+    if(robots) {
+      robots = 'string' === typeof robots
+        ? fs.readFileSync(robots, 'utf8')
+        : render(robots);
+    } else {
+      robots = '';
+    }
+    
     res.header('Content-Type', 'text/plain');
     res.send(robots);
-  });
-
-  return app;
+  }
 };
 
 function render(robots) {
