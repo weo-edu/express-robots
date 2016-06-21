@@ -2,11 +2,20 @@ var fs = require('fs');
 var expect = require('chai').expect;
 var supertest = require('supertest');
 var robots = require('../');
+var express = require('express');
+var request = require('supertest');
 
 describe('express-robots', function() {
+  var app;
+  
+  beforeEach(() => {
+     app = new express();
+  });
+  
   it('should work', function(done) {
-    var request = supertest(robots({UserAgent: '*', Disallow: '/'}));
-    request
+    app.use(robots({UserAgent: '*', Disallow: '/'}));
+
+    request(app)
       .get('/robots.txt')
       .end(function(err, res) {
         expect(res.status).to.equal(200);
@@ -17,8 +26,9 @@ describe('express-robots', function() {
   });
   
   it('should work with a crawl delay', function(done) {
-    var request = supertest(robots({UserAgent: '*', CrawlDelay: '5'}));
-    request
+    app.use(robots({UserAgent: '*', CrawlDelay: '5'}));
+
+    request(app)
       .get('/robots.txt')
       .end(function(err, res) {
         expect(res.status).to.equal(200);
@@ -29,11 +39,12 @@ describe('express-robots', function() {
   });
   
   it('should work with multiple crawl delays', function(done) {
-    var request = supertest(robots([
+    app.use(robots([
       {UserAgent: '*', CrawlDelay: '5'}, 
       {UserAgent: 'Foo', CrawlDelay: '10'}
     ]));
-    request
+    
+    request(app)
       .get('/robots.txt')
       .end(function(err, res) {
         expect(res.status).to.equal(200);
@@ -44,8 +55,9 @@ describe('express-robots', function() {
   });
 
   it('should work with files', function() {
-    var request = supertest(robots(__dirname + '/fixtures/robots.txt'));
-    request
+    app.use(robots(__dirname + '/fixtures/robots.txt'));
+    
+    request(app)
       .get('/robots.txt')
       .end(function(err, res) {
         expect(res.status).to.equal(200);
@@ -54,13 +66,13 @@ describe('express-robots', function() {
   });
 
   it('should respond with an empty file if nothing is specified', function() {
-    var request = supertest(robots());
-    request
+    app.use(robots());
+    
+    request(app)
       .get('/robots.txt')
       .end(function(err, res) {
         expect(res.status).to.equal(200);
         expect(res.text).to.equal('');
       });
   });
-
 });
