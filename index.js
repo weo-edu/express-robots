@@ -26,7 +26,8 @@ module.exports = function(robots) {
 };
 
 function render(robots) {
-  return asArray(robots).map(function(robot) {
+  var SitemapArray = []
+  var robots = asArray(robots).map(function(robot) {
     var userAgentArray = [];
     if (Array.isArray(robot.UserAgent)) {
       userAgentArray = robot.UserAgent.map(function(userAgent) {
@@ -38,6 +39,11 @@ function render(robots) {
     if (robot.CrawlDelay) {
       userAgentArray.push('Crawl-delay: ' + robot.CrawlDelay);
     }
+
+    if (robot.Sitemap) {
+      SitemapArray = SitemapArray.concat(robot.Sitemap)
+    }
+
     return userAgentArray.concat(asArray(robot.Disallow).map(function(disallow) {
       if (Array.isArray(disallow)) {
         return disallow.map(function(line) {
@@ -46,5 +52,11 @@ function render(robots) {
       }
       return 'Disallow: ' + disallow;
     })).join('\n');
-  }).join('\n');
+  }).join('\n')
+
+  if (SitemapArray.length > 0) {
+    robots += '\n' + SitemapArray.map(function(sitemap) { return 'Sitemap: ' + sitemap }).join('\n');
+  }
+
+  return robots;
 }
