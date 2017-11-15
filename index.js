@@ -8,7 +8,7 @@ if (!Array.isArray) {
 }
 
 module.exports = function(robots) {
-  var app = require('express')();
+  var router = require('express').Router();
 
   if(robots) {
     robots = 'string' === typeof robots
@@ -17,12 +17,12 @@ module.exports = function(robots) {
   } else
     robots = '';
 
-  app.get('/robots.txt', function(req, res) {
+  router.get('/robots.txt', function(req, res) {
     res.header('Content-Type', 'text/plain');
     res.send(robots);
   });
 
-  return app;
+  return router;
 };
 
 function render(robots) {
