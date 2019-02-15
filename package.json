@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/weo-edu/express-robots",
   "dependencies": {
-    "as-array": "git://github.com/weo-edu/as-array"
+    "as-array": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^2.1.0",
