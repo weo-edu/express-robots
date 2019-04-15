@@ -52,12 +52,14 @@ function render(robots) {
       userAgentArray.push(`Crawl-delay: ${robot.CrawlDelay}`);
     }
 
-    if (Array.isArray(robot.Sitemap)) {
-      siteMapArray = robot.Sitemap.map((siteMap) => {
-        return `Sitemap: ${siteMap}`;
-      });
-    } else {
-      siteMapArray.push(`Sitemap: ${robot.Sitemap}`);
+    if (robot.Sitemap) {
+      if (Array.isArray(robot.Sitemap)) {
+        siteMapArray = robot.Sitemap.map((siteMap) => {
+          return `Sitemap: ${siteMap}`;
+        });
+      } else {
+        siteMapArray.push(`Sitemap: ${robot.Sitemap}`);
+      }
     }
 
     return userAgentArray.concat(disallowResult(robot.Disallow), siteMapArray).join('\n');
