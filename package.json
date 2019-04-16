@@ -1,6 +1,6 @@
 {
-  "name": "express-robots",
-  "version": "0.1.6",
+  "name": "@dailybeast/express-robots",
+  "version": "0.2.0",
   "description": "Express middleware for generating your robots.txt",
   "main": "index.js",
   "directories": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/weo-edu/express-robots"
+    "url": "https://github.com/dailybeast/express-robots"
   },
   "keywords": [
     "express",
@@ -22,11 +22,11 @@
   "author": "ashaffer (http://github.com/ashaffer)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/weo-edu/express-robots/issues"
+    "url": "https://github.com/dailybeast/express-robots/issues"
   },
-  "homepage": "https://github.com/weo-edu/express-robots",
+  "homepage": "https://github.com/dailybeast/express-robots",
   "dependencies": {
-    "as-array": "git://github.com/weo-edu/as-array"
+    "as-array": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^2.1.0",

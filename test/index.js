@@ -30,7 +30,7 @@ describe('express-robots', function() {
   
   it('should work with multiple crawl delays', function(done) {
     var request = supertest(robots([
-      {UserAgent: '*', CrawlDelay: '5'}, 
+      {UserAgent: '*', CrawlDelay: '5'},
       {UserAgent: 'Foo', CrawlDelay: '10'}
     ]));
     request
@@ -40,6 +40,18 @@ describe('express-robots', function() {
         expect(res.headers['content-type']).to.equal('text/plain; charset=utf-8');
         expect(res.text).to.equal('User-agent: *\nCrawl-delay: 5\nUser-agent: Foo\nCrawl-delay: 10');
         done();
+      });
+  });
+
+  it('should work with sitemap urls', function() {
+    var request = supertest(robots([
+      {UserAgent: '*', Sitemap: 'sitemap1', Sitemap: 'sitemap2'}
+    ]));
+    request
+      .get('/robots.txt')
+      .end(function(err, res) {
+        expect(res.status).to.equal(200);
+        expect(res.text).to.equal('User-agent: *\nSitemap: sitemap1\nSitemap: sitemap2');
       });
   });
 
